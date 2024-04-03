@@ -6,6 +6,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.tools.generic.DateTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -16,6 +17,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import java.io.StringWriter;
+import java.util.Date;
 
 
 @Component
@@ -31,7 +33,11 @@ public class MailerConsumer {
     @RabbitListener(queues = "mailQueue")
     public void sendMail(MailExchangeData mail) throws MessagingException {
         VelocityContext context = new VelocityContext();
+
         context.put("data", mail.getData());
+        context.put("dateTool", new DateTool());
+        context.put("to", mail.getTo());
+
         StringWriter string = new StringWriter();
         velocityEngine.mergeTemplate(mail.getTemplate() + ".vm", "UTF-8", context, string);
         String message = string.toString();

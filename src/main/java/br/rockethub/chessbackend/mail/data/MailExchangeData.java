@@ -57,6 +57,10 @@ public class MailExchangeData implements Serializable {
         }
 
         public MailExchangeData build() {
+
+            assert this.mailExchangeData.to != null : "To field is required";
+            assert this.mailExchangeData.template != null : "Template field is required";
+
             return this.mailExchangeData;
         }
     }

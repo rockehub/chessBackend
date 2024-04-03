@@ -23,7 +23,7 @@ public class VerificationToken implements Serializable {
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER, mappedBy = "token")
     private User user;
 
-
+    @Temporal(TemporalType.TIMESTAMP)
     private Date expiry_date;
 
 

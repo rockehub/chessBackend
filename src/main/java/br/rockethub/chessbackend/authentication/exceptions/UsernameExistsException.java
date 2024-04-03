@@ -1,4 +1,4 @@
-package br.rockethub.utils.exceptions;
+package br.rockethub.chessbackend.authentication.exceptions;
 
 public class UsernameExistsException extends Throwable {
     public UsernameExistsException(final String username) {

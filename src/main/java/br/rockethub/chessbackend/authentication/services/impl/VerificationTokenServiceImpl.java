@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static br.rockethub.chessbackend.authentication.services.impl.ServiceConstants.EXPIRATION;
+import static br.rockethub.utils.commons.CommonsUtils.calculateExpiryDate;
 
 @Service
 
@@ -34,13 +35,7 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
     }
 
 
-    private Date calculateExpiryDate(int expiryTimeInMinutes) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Timestamp(calendar.getTime().getTime()));
-        calendar.add(Calendar.MINUTE, expiryTimeInMinutes);
 
-        return new Date(calendar.getTime().getTime());
-    }
 
     @Autowired
     public void setVerificationTokenRepository(VerificationTokenRepository verificationTokenRepository) {

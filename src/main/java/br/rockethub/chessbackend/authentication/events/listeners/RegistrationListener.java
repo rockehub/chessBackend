@@ -20,6 +20,8 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 import java.util.Random;
 
+import static br.rockethub.utils.commons.CommonsUtils.generateTokenNumbers;
+
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent>, Serializable {
     private static final Logger logger = LoggerFactory.getLogger(RegistrationListener.class);
@@ -51,12 +53,6 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
     }
 
-    private static int generateTokenNumbers() {
-        Random random = new Random();
-        int token = random.nextInt(999999);
-
-        return Integer.parseInt(String.format("%06d", token));
-    }
 
     @Autowired
     public void setVerificationTokenService(VerificationTokenService verificationTokenService) {

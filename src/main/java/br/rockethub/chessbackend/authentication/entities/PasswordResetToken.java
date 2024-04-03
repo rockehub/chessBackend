@@ -1,5 +1,6 @@
 package br.rockethub.chessbackend.authentication.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UuidGenerator;
@@ -15,29 +16,30 @@ public class PasswordResetToken implements Serializable {
     @UuidGenerator
     private UUID id;
 
-    private String password_reset_token;
+    private int passwordResetToken;
 
     @OneToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private User user;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date expiry_date;
 
     public PasswordResetToken() {
         super();
     }
 
-    public PasswordResetToken(final String password_reset_token, Date expiry_date) {
+    public PasswordResetToken(final int passwordResetToken, Date expiry_date) {
         super();
-        this.password_reset_token = password_reset_token;
+        this.passwordResetToken = passwordResetToken;
         this.expiry_date = expiry_date;
     }
 
 
-    public PasswordResetToken(final User user, final String password_reset_token, Date expiry_date) {
+    public PasswordResetToken(final User user, final int passwordResetToken, Date expiry_date) {
         super();
         this.user = user;
-        this.password_reset_token = password_reset_token;
+        this.passwordResetToken = passwordResetToken;
         this.expiry_date = expiry_date;
     }
 
@@ -50,12 +52,12 @@ public class PasswordResetToken implements Serializable {
         this.id = id;
     }
 
-    public String getPasswordResetToken() {
-        return password_reset_token;
+    public int getPasswordResetToken() {
+        return passwordResetToken;
     }
 
-    public void setPasswordResetToken(String password_reset_token) {
-        this.password_reset_token = password_reset_token;
+    public void setPasswordResetToken(int passwordResetToken) {
+        this.passwordResetToken = passwordResetToken;
     }
 
     public User getUser() {
@@ -74,8 +76,8 @@ public class PasswordResetToken implements Serializable {
         this.expiry_date = expiry_date;
     }
 
-    public void updateToken(String token, Date expiry_date) {
-        this.password_reset_token = token;
+    public void updateToken(int token, Date expiry_date) {
+        this.passwordResetToken = token;
         this.expiry_date = expiry_date;
     }
 }

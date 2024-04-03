@@ -47,7 +47,7 @@ public class User implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date activated_at;
 
-    private boolean is_active;
+    private boolean active;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JsonIgnore
@@ -131,12 +131,12 @@ public class User implements Serializable {
         this.activated_at = activated_at;
     }
 
-    public boolean isIsActive() {
-        return is_active;
+    public boolean isActive() {
+        return active;
     }
 
     public void setIsActive(boolean is_active) {
-        this.is_active = is_active;
+        this.active = is_active;
     }
 
     public VerificationToken getToken() {

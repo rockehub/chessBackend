@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.context.annotation.Import;
+import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.*;
@@ -22,6 +24,7 @@ import java.util.Collections;
 @Configuration
 @EnableSwagger2
 @SecurityScheme(name = "bearer", scheme = "bearer", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
+@Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfiguration {
 
 

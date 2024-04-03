@@ -18,7 +18,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableRabbit
-@EnableSwagger2
 public class ChessBackendApplication implements ApplicationRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(ChessBackendApplication.class);

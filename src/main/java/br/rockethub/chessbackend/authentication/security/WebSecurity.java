@@ -71,7 +71,7 @@ public class WebSecurity {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .headers(headers -> headers.defaultsDisabled()
                         .cacheControl(Customizer.withDefaults())
-                        .contentSecurityPolicy(Customizer.withDefaults())
+                        .contentSecurityPolicy(contentSecurityPolicy -> contentSecurityPolicy.policyDirectives("default-src 'none'; img-src 'self' data:; font-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'none'"))
                         .contentTypeOptions(Customizer.withDefaults())
                         .xssProtection(Customizer.withDefaults())
                         .httpStrictTransportSecurity(Customizer.withDefaults())

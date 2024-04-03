@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -29,8 +30,6 @@ import java.util.List;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class WebSecurity {
-
-
     private AuthenticationConfiguration authenticationConfiguration;
 
 
@@ -38,6 +37,14 @@ public class WebSecurity {
 
 
     private RoleService roleService;
+
+    private static final String[] AUTH_WHITE_LIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/v2/api-docs/**",
+            "/swagger-resources/**",
+            "/api/v1/authentication/**"
+    };
 
     @Bean
     public BCryptPasswordEncoder  passwordEncoder() {
@@ -53,20 +60,19 @@ public class WebSecurity {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        String[] requestMatchers = new String[]{"/register"};
+
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize
-                        -> authorize.requestMatchers(requestMatchers).permitAll()
+                        -> authorize.requestMatchers(AUTH_WHITE_LIST).permitAll()
                         .anyRequest().authenticated())
                 .addFilter(new JWTAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationConfiguration.getAuthenticationManager(), userRepository, roleService))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .headers(headers -> headers.defaultsDisabled()
                         .cacheControl(Customizer.withDefaults())
+                        .contentSecurityPolicy(Customizer.withDefaults())
                         .contentTypeOptions(Customizer.withDefaults())
-                        .contentSecurityPolicy(contentSecurityPolicyConfig ->
-                                contentSecurityPolicyConfig.policyDirectives("default-src 'none'"))
                         .xssProtection(Customizer.withDefaults())
                         .httpStrictTransportSecurity(Customizer.withDefaults())
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::deny));

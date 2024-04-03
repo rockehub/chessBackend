@@ -47,14 +47,15 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         if (header == null || !header.startsWith(TOKEN_PREFIX)) {
             logger.error("Token not found");
             chain.doFilter(request, response);
-            return;
+
+        }else {
+
+            UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            chain.doFilter(request, response);
         }
-
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        chain.doFilter(request, response);
     }
 
 

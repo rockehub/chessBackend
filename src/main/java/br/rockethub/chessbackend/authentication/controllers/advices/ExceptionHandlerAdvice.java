@@ -1,6 +1,8 @@
 package br.rockethub.chessbackend.authentication.controllers.advices;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,11 +11,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.client.HttpClientErrorException;
 
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
-
+    private static final Logger logger = LoggerFactory.getLogger(ExceptionHandlerAdvice.class);
     @ExceptionHandler(value = {Exception.class})
     @ResponseBody
     public ResponseEntity<Object> handleException(Exception e) {
@@ -21,6 +22,8 @@ public class ExceptionHandlerAdvice {
         headers.add("Content-Type", "application/json");
         JSONObject json = new JSONObject();
         json.put("error", e.getMessage());
+        logger.error("Error: ", e);
+
         return new ResponseEntity<>(json.toString(),headers, org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

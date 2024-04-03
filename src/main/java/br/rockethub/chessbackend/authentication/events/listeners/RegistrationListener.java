@@ -3,22 +3,16 @@ package br.rockethub.chessbackend.authentication.events.listeners;
 import br.rockethub.chessbackend.authentication.data.RegistrationTokenData;
 import br.rockethub.chessbackend.authentication.entities.User;
 import br.rockethub.chessbackend.authentication.events.OnRegistrationCompleteEvent;
-import br.rockethub.chessbackend.authentication.services.UserService;
 import br.rockethub.chessbackend.authentication.services.VerificationTokenService;
-import br.rockethub.chessbackend.authentication.services.impl.UserServiceImpl;
-import br.rockethub.chessbackend.mail.data.MailExchangeData;
 import br.rockethub.chessbackend.mail.services.MailSenderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.util.Random;
 
 import static br.rockethub.utils.commons.CommonsUtils.generateTokenNumbers;
 

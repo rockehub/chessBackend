@@ -1,7 +1,6 @@
 package br.rockethub.chessbackend.authentication.entities;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serializable;

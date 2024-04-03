@@ -1,6 +1,5 @@
 package br.rockethub.chessbackend.authentication.data;
 
-import br.rockethub.utils.status.ResponseUtils;
 import br.rockethub.utils.status.StatusMessages;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

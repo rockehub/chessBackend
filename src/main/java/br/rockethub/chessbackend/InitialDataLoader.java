@@ -1,8 +1,5 @@
 package br.rockethub.chessbackend;
 
-import java.util.*;
-
-
 import br.rockethub.chessbackend.authentication.entities.Privilege;
 import br.rockethub.chessbackend.authentication.entities.Role;
 import br.rockethub.chessbackend.authentication.entities.User;
@@ -16,6 +13,11 @@ import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 
 

@@ -1,6 +1,5 @@
 package br.rockethub.chessbackend.authentication.security.listeners;
 
-import br.rockethub.chessbackend.ChessBackendApplication;
 import br.rockethub.chessbackend.authentication.services.LoginAttemptService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;

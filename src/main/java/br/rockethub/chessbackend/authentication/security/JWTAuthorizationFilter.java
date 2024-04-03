@@ -21,7 +21,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static br.rockethub.chessbackend.authentication.security.SecurityConstants.*;
+import static br.rockethub.chessbackend.authentication.security.SecurityConstants.HEADER_STRING;
+import static br.rockethub.chessbackend.authentication.security.SecurityConstants.TOKEN_PREFIX;
 import static br.rockethub.utils.security.SecurityUtils.generalKey;
 
 

@@ -1,11 +1,9 @@
 package br.rockethub.chessbackend.authentication.entities;
 
-import br.rockethub.chessbackend.ChessBackendApplication;
 import br.rockethub.utils.validations.ValidEmail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UuidGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

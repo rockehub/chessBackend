@@ -7,8 +7,6 @@ import br.rockethub.chessbackend.authentication.services.VerificationTokenServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.Date;
 
 import static br.rockethub.chessbackend.authentication.services.impl.ServiceConstants.EXPIRATION;

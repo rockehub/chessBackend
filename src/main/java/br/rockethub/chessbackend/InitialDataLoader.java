@@ -12,6 +12,7 @@ import br.rockethub.chessbackend.authentication.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +39,7 @@ public class InitialDataLoader implements
 
     @Override
     @Transactional
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+    public void onApplicationEvent(@NonNull ContextRefreshedEvent event) {
 
         if (alreadySetup)
             return;
@@ -57,6 +58,7 @@ public class InitialDataLoader implements
         user.setName("test");
         user.setSurname("Test");
         user.setUsername("test");
+        user.setIsActive(true);
         user.setPassword(passwordEncoder.encode("test"));
         user.setEmail("test@test.com");
         user.setRoles(Collections.singletonList(adminRole));

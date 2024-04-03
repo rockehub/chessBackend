@@ -25,7 +25,6 @@ public class ChessBackendApplication implements ApplicationRunner {
     UserRepository userRepository;
 
 
-
     public static void main(String[] args) {
         SpringApplication.run(ChessBackendApplication.class, args);
     }

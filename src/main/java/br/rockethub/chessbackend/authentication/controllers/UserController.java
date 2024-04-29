@@ -35,7 +35,7 @@ public class UserController extends ApiController {
         } catch (UsernameNotFoundException e) {
             return response.createErrorResponse(StatusMessages.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
         } catch (UserNotActivatedException e) {
-            return response.createErrorResponse(StatusMessages.USER_NOT_ACTIVATED, HttpStatus.FORBIDDEN);
+            return response.createErrorResponse(StatusMessages.USER_NOT_ACTIVATED, HttpStatus.CONFLICT);
         }
     }
 

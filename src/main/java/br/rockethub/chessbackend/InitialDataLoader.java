@@ -43,6 +43,10 @@ public class InitialDataLoader implements
     @Transactional
     public void onApplicationEvent(@NonNull ContextRefreshedEvent event) {
 
+        if (userRepository.findByUsername("test") != null) {
+            return;
+        }
+
         if (alreadySetup)
             return;
         Privilege readPrivilege

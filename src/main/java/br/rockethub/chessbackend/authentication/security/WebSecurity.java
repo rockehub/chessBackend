@@ -43,7 +43,7 @@ public class WebSecurity {
     };
 
     @Bean
-    public BCryptPasswordEncoder  passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -66,9 +66,7 @@ public class WebSecurity {
                 .addFilter(new JWTAuthorizationFilter(authenticationConfiguration.getAuthenticationManager(), userRepository, roleService))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .headers(headers -> headers.defaultsDisabled()
-                        .cacheControl(Customizer.withDefaults())
-                        .contentSecurityPolicy(contentSecurityPolicy -> contentSecurityPolicy.policyDirectives("default-src 'none'; img-src 'self' data:; font-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'none'"))
-                        .contentTypeOptions(Customizer.withDefaults())
+                        .cacheControl(Customizer.withDefaults()).contentTypeOptions(Customizer.withDefaults())
                         .xssProtection(Customizer.withDefaults())
                         .httpStrictTransportSecurity(Customizer.withDefaults())
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::deny));
@@ -77,7 +75,6 @@ public class WebSecurity {
 
 
     }
-
 
 
 

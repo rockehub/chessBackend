@@ -1,9 +1,12 @@
 package br.rockethub.chessbackend.authentication.controllers;
 
 import br.rockethub.chessbackend.authentication.data.PasswordChangeForm;
+import br.rockethub.chessbackend.authentication.data.ResponseData;
 import br.rockethub.chessbackend.authentication.entities.User;
 import br.rockethub.chessbackend.authentication.exceptions.*;
 import br.rockethub.chessbackend.authentication.services.AuthenticationService;
+import br.rockethub.utils.status.ResponseUtils;
+import br.rockethub.utils.status.StatusMessages;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,13 +23,15 @@ public class AuthenticationController extends ApiController {
     AuthenticationService authenticationService;
 
     @PostMapping(value = "authentication/register")
-    public ResponseEntity<Object> saveUser(@RequestBody User user) {
+    public ResponseEntity<ResponseData<Object>> saveUser(@RequestBody User user) {
+        ResponseUtils<Object> response = new ResponseUtils<>();
+
         try {
             authenticationService.register(user);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return response.createSuccessResponse(null, StatusMessages.USER_REGISTERED);
         } catch (EmailExistsException | UsernameExistsException e) {
             logger.error(e.getMessage());
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+            return response.createErrorResponse(StatusMessages.USER_ALREADY_EXISTS, HttpStatus.CONFLICT);
         }
 
     }
